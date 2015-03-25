@@ -1,0 +1,143 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                tools:context="com.tipsandtricks.Pollr.view.PollDetailView">
+
+    <!-- START - User profile at the top of the page -->
+
+    <ImageView
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:paddingRight="16dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/avatar"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="xxheysarah44_luv"
+        android:id="@+id/tvUsername"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingLeft="4dp"
+        android:text="Flurries"
+        android:id="@+id/tvStaticFlurries"
+        android:layout_below="@+id/tvUsername"
+        android:layout_toRightOf="@+id/tvFlurryScore"
+        android:layout_toEndOf="@+id/tvFlurryScore"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivTag"
+        android:src="@drawable/ic_paul_tag"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/tvFlurryScore"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Tag"
+        android:id="@+id/tvTag"
+        android:layout_alignBottom="@+id/ivTag"
+        android:layout_toRightOf="@+id/ivTag"
+        android:layout_toEndOf="@+id/ivTag"/>
+
+    <TextView
+        android:paddingTop="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Time remaining: "
+        android:id="@+id/tvStaticTimeRemaining"
+        android:layout_below="@+id/ivTag"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="6m 20s"
+        android:id="@+id/tvTimeRemaining"
+        android:layout_alignBottom="@+id/tvStaticTimeRemaining"
+        android:layout_toRightOf="@+id/tvStaticTimeRemaining"
+        android:layout_toEndOf="@+id/tvStaticTimeRemaining"/>
+
+    <!-- END - User profile at the top of the page -->
+
+    <!-- START - Poll choices -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Poll Title"
+        android:id="@+id/tvPollDetailTitle"
+        android:layout_marginTop="32dp"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button Option 1"
+        android:id="@+id/bOption1"
+        android:onClick="button1Click"
+        android:layout_below="@+id/tvPollDetailTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="32dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="button2Click"
+        android:text="Button Option 2"
+        android:id="@+id/bOption2"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/bOption1"
+        android:layout_below="@+id/bOption1"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="button3Click"
+        android:text="Button Option 3"
+        android:id="@+id/bOption3"
+        android:layout_below="@+id/bOption2"
+        android:layout_alignRight="@+id/bOption2"
+        android:layout_alignEnd="@+id/bOption2"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="42,069"
+        android:id="@+id/tvFlurryScore"
+        android:layout_below="@+id/tvUsername"
+        android:layout_alignLeft="@+id/tvUsername"
+        android:layout_alignStart="@+id/tvUsername"/>
+
+    <!-- END - Poll choices -->
+
+</RelativeLayout>

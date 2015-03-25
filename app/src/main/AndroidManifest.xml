@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.lustig.pollr" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".view.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.AddPollActivity" >
+        </activity>
+        <activity
+            android:name=".view.PollItemDetailView"
+            android:label="@string/title_activity_poll_item_detail_view" >
+        </activity>
+        <activity
+            android:name=".view.PublicPollsActivity"
+            android:label="@string/title_activity_public_polls" >
+        </activity>
+        <activity
+            android:name=".view.HomeScreenActivity"
+            android:label="@string/title_activity_home_screen" >
+        </activity>
+        <activity
+            android:name=".view.MyPollsActivity"
+            android:label="@string/title_activity_my_polls" >
+        </activity>
+        <activity
+            android:name=".view.PollDetailView"
+            android:label="@string/title_activity_poll_detail_view" >
+        </activity>
+    </application>
+
+</manifest>
