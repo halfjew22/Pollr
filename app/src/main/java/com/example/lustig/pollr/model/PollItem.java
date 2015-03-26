@@ -31,8 +31,14 @@ public class PollItem implements Parcelable {
         return mVoteCount;
     }
 
+    public void setVoteCount(int voteCount) {
+        mVoteCount = voteCount;
+    }
+
     public void incrementVote() {
         mVoteCount++;
+
+
     }
 
     @Override

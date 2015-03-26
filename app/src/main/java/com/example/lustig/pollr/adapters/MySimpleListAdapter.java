@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.lustig.pollr.R;
 import com.example.lustig.pollr.model.Poll;
+import com.example.lustig.pollr.model.PollItem;
 
 import java.util.Collections;
 import java.util.List;
@@ -39,7 +40,7 @@ public class MySimpleListAdapter extends RecyclerView.Adapter<MySimpleListAdapte
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = mInflator.inflate(R.layout.text_poll_row, parent, false);
+        View view = mInflator.inflate(R.layout.text_poll_card, parent, false);
 
         MyViewHolder holder = new MyViewHolder(view);
 
@@ -49,13 +50,13 @@ public class MySimpleListAdapter extends RecyclerView.Adapter<MySimpleListAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-        /**
-         * ToDo Change Information out for Poll data and adjust inflation accordingly
-         */
-        Poll current = mData.get(position);
-        holder.label.setText(current.getTitle());
+        final Poll currentPoll = mData.get(position);
+        final List<PollItem> currentPollItems = currentPoll.getPollItems();
+        holder.label.setText(currentPoll.getTitle());
 
-        holder.tvOption1.setText(current.getPollItems().get(0).getTitle());
+        holder.tvOption1.setText(currentPollItems.get(0).getTitle());
+        holder.tvOption2.setText(currentPollItems.get(1).getTitle());
+        holder.tvOption3.setText(currentPollItems.get(2).getTitle());
 
         holder.root.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,23 +66,60 @@ public class MySimpleListAdapter extends RecyclerView.Adapter<MySimpleListAdapte
                         "You clicked the root view",
                         Toast.LENGTH_SHORT
                 ).show();
+
+
             }
         });
-
-
 
         holder.tvOption1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                currentPoll.incrementPollItemVoteCount(0);
+
                 Toast.makeText(
                         mContext,
-                        "You clicked option 1 in poll " + (position + 1),
+                        "You clicked option 1 in poll " + (position + 1) + ": " + currentPollItems.get(0).getVoteCount(),
                         Toast.LENGTH_SHORT
                 ).show();
+
+
+
+            }
+        });
+
+        holder.tvOption2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                currentPoll.incrementPollItemVoteCount(1);
+
+                Toast.makeText(
+                        mContext,
+                        "You clicked option 2 in poll " + (position + 1)  + ": " + currentPollItems.get(1).getVoteCount(),
+                        Toast.LENGTH_SHORT
+                ).show();
+
+            }
+        });
+
+        holder.tvOption3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                currentPoll.incrementPollItemVoteCount(2);
+
+                Toast.makeText(
+                        mContext,
+                        "You clicked option 3 in poll " + (position + 1)  + ": " + currentPollItems.get(2).getVoteCount(),
+                        Toast.LENGTH_SHORT
+                ).show();
+
             }
         });
 
     }
+
 
     @Override
     public int getItemCount() {
@@ -100,6 +138,7 @@ public class MySimpleListAdapter extends RecyclerView.Adapter<MySimpleListAdapte
 
         LinearLayout root;
 
+        // These image views are going to be used if the poll is image based, using textviews for now
         ImageView ivOption1;
         ImageView ivOption2;
         ImageView ivOption3;
@@ -108,9 +147,12 @@ public class MySimpleListAdapter extends RecyclerView.Adapter<MySimpleListAdapte
         ImageView ivOption6;
 
         TextView tvOption1;
+        TextView tvOption2;
+        TextView tvOption3;
 
         public MyViewHolder(View itemView) {
             super(itemView);
+
 
             root = (LinearLayout) itemView.findViewById(R.id.root);
 
@@ -118,7 +160,8 @@ public class MySimpleListAdapter extends RecyclerView.Adapter<MySimpleListAdapte
 //            ivOption1 = (ImageView) itemView.findViewById(R.id.ivOption1);
 
             tvOption1 = (TextView) itemView.findViewById(R.id.tvOption1);
-
+            tvOption2 = (TextView) itemView.findViewById(R.id.tvOption2);
+            tvOption3 = (TextView) itemView.findViewById(R.id.tvOption3);
         }
     }
 

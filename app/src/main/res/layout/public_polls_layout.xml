@@ -10,7 +10,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/publicpollRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="9"/>
 
     <Button
         android:layout_width="match_parent"
@@ -18,8 +19,6 @@
         android:layout_weight="1"
         android:text="Add Poll"
         android:id="@+id/bAddPoll"
-        android:onClick="addPoll"
-        />
-
+        android:onClick="addPoll" />
 
 </LinearLayout>

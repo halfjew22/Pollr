@@ -4,7 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,6 +120,22 @@ public class Poll implements Parcelable {
         mPollItems.add(new PollItem(mOption3, mVote3));
     }
 
+    public Poll (Parcel p) {
+
+        mTitle = p.readString();
+        mPollItems = p.readArrayList(getClass().getClassLoader());
+
+        mObjectID = p.readString();
+
+        mVote1 = p.readInt();
+        mVote2 = p.readInt();
+        mVote3 = p.readInt();
+
+        mOption1 = p.readString();
+        mOption2 = p.readString();
+        mOption3 = p.readString();
+    }
+
     /* Poll constructor to specify question and PollItems */
 
     public Poll(String title, ArrayList<PollItem> pollItems) {
@@ -141,20 +160,42 @@ public class Poll implements Parcelable {
         return mObjectID;
     }
 
-    public Poll (Parcel p) {
+    public void incrementPollItemVoteCount(final int pollItemPosition) {
 
-        mTitle = p.readString();
-        mPollItems = p.readArrayList(getClass().getClassLoader());
+        final PollItem incrementItem = mPollItems.get(pollItemPosition);
 
-        mObjectID = p.readString();
+        // Increments the vote count locally
+        // Look for way to do both locally and remotely at the same time
+        //incrementItem.incrementVote();
 
-        mVote1 = p.readInt();
-        mVote2 = p.readInt();
-        mVote3 = p.readInt();
+        // increment database
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Poll");
 
-        mOption1 = p.readString();
-        mOption2 = p.readString();
-        mOption3 = p.readString();
+        query.whereEqualTo("objectId", mObjectID);
+
+
+        List<ParseObject> parseObjects;
+
+        query.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> returnedPolls, ParseException e) {
+                if (e == null) {
+
+                    /**
+                     * We have the specific object ID we're looking for, so this query
+                     * will only return a list of one returnedPolls. Therefore, increment the
+                     * 0th element of the returnedPolls.
+                     */
+                    incrementItem.setVoteCount(returnedPolls.get(0).getInt( "vote" + (pollItemPosition + 1)) + 1);
+                    returnedPolls.get(0).increment("vote" + (pollItemPosition + 1));
+                    returnedPolls.get(0).saveInBackground();
+
+
+                } else {
+                    Log.d("score", "Error: " + e.getMessage());
+                }
+            }
+        });
+
     }
 
     public String getVoteString() {

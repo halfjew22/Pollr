@@ -24,7 +24,8 @@
         </activity>
         <activity
             android:name=".view.PublicPollsActivity"
-            android:label="@string/title_activity_public_polls" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

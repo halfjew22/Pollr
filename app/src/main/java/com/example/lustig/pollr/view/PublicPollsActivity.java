@@ -1,7 +1,6 @@
 package com.example.lustig.pollr.view;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -71,6 +70,10 @@ public class PublicPollsActivity extends Activity {
 
     }
 
+    public void button3(View v) {
+        Log.d("BUTTON 3## # # ##!", "Button 3 clicked");
+    }
+
     /**
      * Right now, we are downloading all polls and updating the list with each one.
      * This is terribly inefficient. I think we might need to add more fields to the object
@@ -84,14 +87,6 @@ public class PublicPollsActivity extends Activity {
      * Currently, just called in the beginning of onCreate.
      */
     public void getUpdateFromDatabase() {
-
-        /**
-         * ToDo show loading spinner and use callback to make loading smoother
-         */
-
-        ProgressDialog progress = new ProgressDialog(this);
-        progress.setTitle("Loading Polls");
-        progress.show();
 
         // Assume ParseObject myPost was previously created.
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Poll");
@@ -107,9 +102,8 @@ public class PublicPollsActivity extends Activity {
                 mPolls.add(poll);
 
                 Log.d("MichaelLustig", mPolls.size() + "");
-                progress.dismiss();
-
             }
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -136,8 +130,6 @@ public class PublicPollsActivity extends Activity {
 //            }
 //        });
     }
-
-
 
     public void addPoll(View v) {
 
