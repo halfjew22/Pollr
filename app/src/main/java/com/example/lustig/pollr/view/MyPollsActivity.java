@@ -19,7 +19,7 @@ public class MyPollsActivity extends ActionBarActivity {
     /**
      * ToDo fix these inflators and use Google's RecyclerView + CardView
      */
-    BaseInflaterAdapter<Poll> mAdapter;
+//    BaseInflaterAdapter<Poll> mAdapter;
     String mObjectIDFromPreviousActivity;
 
     /**
@@ -40,9 +40,9 @@ public class MyPollsActivity extends ActionBarActivity {
         /**
          * ToDo fix these inflators and use Google's RecyclerView + CardView
          */
-        mAdapter = new BaseInflaterAdapter<Poll>(new CardInflater());
+//        mAdapter = new BaseInflaterAdapter<Poll>(new CardInflater());
 
-        list.setAdapter(mAdapter);
+//        list.setAdapter(mAdapter);
     }
 
     private void getTestDataFromInterwebz() {
@@ -94,7 +94,7 @@ public class MyPollsActivity extends ActionBarActivity {
                 option3 = data.getStringExtra("option3");
 
                 Poll newItem = new Poll(title);
-                mAdapter.addItem(newItem, true);
+//                mAdapter.addItem(newItem, true);
 
             } else {
                 Toast.makeText(

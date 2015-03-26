@@ -7,6 +7,9 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.lustig.pollr.R;
 import com.example.lustig.pollr.adapters.MySimpleListAdapter;
+import com.example.lustig.pollr.model.Poll;
+import com.parse.Parse;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +30,6 @@ public class MainActivity extends ActionBarActivity {
          */
 
 
-//         // Enable Local Datastore.
-//         Parse.enableLocalDatastore(this);
-//
-//         ParseUser.enableAutomaticUser();
-//
-//         Parse.initialize(this,
-//                 "0a0zQDm9BiHwRw6FNQqUM4vj8fHeEAAA4EAVGUr5",
-//                 "XJhfRJboOpgtxabo4CHLieVCPBA0yDJnI1MDkQnC");
 
         mAdapter = new MySimpleListAdapter(getApplicationContext(), getData());
 
@@ -46,25 +41,11 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    public static List<Information> getData() {
+    public static List<Poll> getData() {
 
-        List<Information> data = new ArrayList<>();
+        List<Poll> data = new ArrayList<>();
 
-        String[] titles = {
-                "Poll 1",
-                "Poll 2",
-                "Poll 3",
-                "Poll 4"
-        };
 
-        for (int i = 0; i < titles.length; i++) {
-
-            Information current = new Information();
-            current.title = titles[i];
-
-            data.add(current);
-
-        }
 
         return data;
 

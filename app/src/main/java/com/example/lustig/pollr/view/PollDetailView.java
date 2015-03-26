@@ -19,6 +19,11 @@ import com.parse.ParseQuery;
 
 import java.util.List;
 
+/**
+ * ToDo fix buttonXClick methods by using implementing an OnClickListener within the class
+ *
+ */
+
 public class PollDetailView extends ActionBarActivity {
 
     Poll mPoll;

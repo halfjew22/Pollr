@@ -206,16 +206,16 @@ public class Poll implements Parcelable {
         dest.writeString(mOption3);
     }
 
-    public static Creator<Poll> CREATOR = new Creator<Poll>() {
-        @Override
-        public Poll createFromParcel(Parcel source) {
-            return new Poll(source);
-        }
-
-        @Override
-        public Poll[] newArray(int size) {
-            return new Poll[size];
-        }
-    };
+//    public static Creator<Poll> CREATOR = new Creator<Poll>() {
+//        @Override
+//        public Poll createFromParcel(Parcel source) {
+//            return new Poll(source);
+//        }
+//
+//        @Override
+//        public Poll[] newArray(int size) {
+//            return new Poll[size];
+//        }
+//    };
 
 }

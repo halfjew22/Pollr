@@ -7,17 +7,10 @@
 	android:layout_height="match_parent"
 	android:background="#E0EEEE">
 
-	<ListView
-		android:id="@+id/list_view"
-		android:layout_width="match_parent"
-		android:layout_height="0dp"
-        android:layout_weight="9"
-		android:headerDividersEnabled="true"
-		android:footerDividersEnabled="true"
-		android:listSelector="@android:color/transparent"
-		android:cacheColorHint="@android:color/transparent"
-		android:divider="@null"
-		android:dividerHeight="10dp" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/publicpollRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <Button
         android:layout_width="match_parent"
