@@ -86,6 +86,9 @@ public class Poll implements Parcelable {
      */
     public Poll(String title) {
 
+        // Comment here to change to commit?
+
+
         mType = TYPE_IMAGE;
 
         mTitle = title;
