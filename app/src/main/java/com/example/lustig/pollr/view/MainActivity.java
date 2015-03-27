@@ -8,8 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import com.example.lustig.pollr.R;
 import com.example.lustig.pollr.adapters.MySimpleListAdapter;
 import com.example.lustig.pollr.model.Poll;
-import com.parse.Parse;
-import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +22,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        /**
-         * ToDo reinitizlize can't spell Parse API by uncommenting the below
-         */
-
-
 
         mAdapter = new MySimpleListAdapter(getApplicationContext(), getData());
 

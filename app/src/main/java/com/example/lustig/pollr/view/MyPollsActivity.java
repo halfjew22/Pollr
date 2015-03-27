@@ -16,33 +16,19 @@ import com.parse.ParseQuery;
 
 public class MyPollsActivity extends ActionBarActivity {
 
-    /**
-     * ToDo fix these inflators and use Google's RecyclerView + CardView
-     */
-//    BaseInflaterAdapter<Poll> mAdapter;
     String mObjectIDFromPreviousActivity;
 
-    /**
-     * Called when the activity is first created.
-     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_polls_layout);
 
-//        getTestDataFromInterwebz();
-
         ListView list = (ListView) findViewById(R.id.list_view);
-
-        list.addHeaderView(new View(this));
-        list.addFooterView(new View(this));
 
         /**
          * ToDo fix these inflators and use Google's RecyclerView + CardView
          */
-//        mAdapter = new BaseInflaterAdapter<Poll>(new CardInflater());
 
-//        list.setAdapter(mAdapter);
     }
 
     private void getTestDataFromInterwebz() {
@@ -73,7 +59,6 @@ public class MyPollsActivity extends ActionBarActivity {
         });
 
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

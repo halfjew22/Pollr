@@ -1,21 +1,13 @@
 package com.example.lustig.pollr.view;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.lustig.pollr.R;
 import com.example.lustig.pollr.model.Poll;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
+import com.example.lustig.pollr.model.PollItem;
 
 import java.util.List;
 
@@ -26,8 +18,8 @@ import java.util.List;
 
 public class PollDetailView extends ActionBarActivity {
 
-    Poll mPoll;
-
+    Poll mCurrentPoll;
+    List<PollItem> mCurrentPollItems;
     TextView mtvTitle;
 
     Button mbOption1;
@@ -45,273 +37,19 @@ public class PollDetailView extends ActionBarActivity {
 
         // Stupid workaround, but I'm lazy. Sue me.
         // Wasn't parceable, whodda thought.
-        mPoll = null;
+        mCurrentPoll = null;
 
         if(extras != null) {
-            mPoll = extras.getParcelable(Poll.CLASS_TAG);
+            mCurrentPoll = extras.getParcelable(Poll.CLASS_TAG);
         }
 
-        mtvTitle.setText(mPoll.getTitle());
+        mCurrentPollItems = mCurrentPoll.getPollItems();
 
-        mbOption1.setText(mPoll.getPollItems().get(0).getTitle());
-        mbOption2.setText(mPoll.getPollItems().get(1).getTitle());
-        mbOption3.setText(mPoll.getPollItems().get(2).getTitle());
-    }
+        mtvTitle.setText(mCurrentPoll.getTitle());
 
-    /**
-     * ToDo fix this ugly fucking code having different functions for different
-     * buttons. GET YOUR SHIT TOGETHER SMALLS!
-     */
-    public void button1Click(View v) {
-
-        disableButtons();
-
-        // Color voted button blue, what hex value?
-        mbOption1.setBackgroundColor(Color.parseColor("#00AEEF"));
-
-        // increment the vote count locally and on the database
-        // local increment
-        mPoll.getPollItems().get(0).incrementVote();
-
-        // increment database
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Poll");
-
-        Log.d("MichaelLustig", mPoll.getObjectID());
-
-        query.whereEqualTo("objectId", mPoll.getObjectID());
-        query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> poll, ParseException e) {
-                if (e == null) {
-
-                    Log.d("Poll",
-                            poll.get(0).getInt("vote1") + "");
-
-                    Log.d("Poll", "Retrieved " + poll.size() + " scores");
-
-                    poll.get(0).increment("vote1");
-                    poll.get(0).saveInBackground();
-
-
-                } else {
-                    Log.d("score", "Error: " + e.getMessage());
-                }
-            }
-        });
-        // First, check for five total votes. If
-        if(mPoll.getTotalVotes()>=5)
-
-        {
-
-            // Show dialog one final time
-            AlertDialog alertDialog = new AlertDialog.Builder(PollDetailView.this).create();
-            alertDialog.setTitle("Votes");
-
-            // Show each vote per item
-            String message = mPoll.getVoteString();
-
-            alertDialog.setMessage(message);
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            alertDialog.show();
-
-            // Disable buttons
-            disableButtons();
-
-
-
-            // return
-            return;
-        }
-
-
-        AlertDialog alertDialog = new AlertDialog.Builder(PollDetailView.this).create();
-        alertDialog.setTitle("Votes");
-
-        // Show each vote per item
-        String message = mPoll.getVoteString();
-
-        alertDialog.setMessage(message);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,"OK",
-                new DialogInterface.OnClickListener()
-
-                {
-                    public void onClick (DialogInterface dialog,int which){
-                        dialog.dismiss();
-                    }
-                }
-
-        );
-        alertDialog.show();
-    }
-
-    /**
-     * ToDo fix this ugly fucking code having different functions for different
-     * buttons. GET YOUR SHIT TOGETHER SMALLS!
-     */
-    public void button2Click(View v) {
-
-        disableButtons();
-
-        // Color voted button blue, what hex value?
-        mbOption2.setBackgroundColor(Color.parseColor("#00AEEF"));
-
-        mPoll.getPollItems().get(1).incrementVote();
-
-        // increment database
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Poll");
-
-        Log.d("MichaelLustig", mPoll.getObjectID());
-
-        query.whereEqualTo("objectId", mPoll.getObjectID());
-        query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> poll, ParseException e) {
-                if (e == null) {
-
-                    Log.d("Poll",
-                            poll.get(0).getInt("vote2") + "");
-
-                    Log.d("Poll", "Retrieved " + poll.size() + " scores");
-
-                    poll.get(0).increment("vote2");
-                    poll.get(0).saveInBackground();
-
-
-                } else {
-                    Log.d("score", "Error: " + e.getMessage());
-                }
-            }
-        });
-
-        // First, check for five total votes. If
-        if (mPoll.getTotalVotes() >= 5) {
-
-            // Show dialog one final time
-            AlertDialog alertDialog = new AlertDialog.Builder(PollDetailView.this).create();
-            alertDialog.setTitle("Votes");
-
-            // Show each vote per item
-            String message = mPoll.getVoteString();
-
-            alertDialog.setMessage(message);
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            alertDialog.show();
-
-            // Disable buttons
-            disableButtons();
-
-
-
-            // return
-            return;
-        }
-
-
-
-        AlertDialog alertDialog = new AlertDialog.Builder(PollDetailView.this).create();
-        alertDialog.setTitle("Votes");
-
-        // Show each vote per item
-        String message = mPoll.getVoteString();
-
-        alertDialog.setMessage(message);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
-    }
-
-    /**
-     * ToDo fix this ugly fucking code having different functions for different
-     * buttons. GET YOUR SHIT TOGETHER SMALLS!
-     */
-    public void button3Click(View v) {
-
-        disableButtons();
-
-        // Color voted button blue, what hex value?
-        mbOption3.setBackgroundColor(Color.parseColor("#00AEEF"));
-
-        mPoll.getPollItems().get(2).incrementVote();
-
-        // increment database
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Poll");
-
-        Log.d("MichaelLustig", mPoll.getObjectID());
-
-        query.whereEqualTo("objectId", mPoll.getObjectID());
-        query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> poll, ParseException e) {
-                if (e == null) {
-
-                    Log.d("Poll",
-                            poll.get(0).getInt("vote3") + "");
-
-                    Log.d("Poll", "Retrieved " + poll.size() + " scores");
-
-                    poll.get(0).increment("vote3");
-                    poll.get(0).saveInBackground();
-
-
-                } else {
-                    Log.d("score", "Error: " + e.getMessage());
-                }
-            }
-        });
-
-        // First, check for five total votes. If
-        if (mPoll.getTotalVotes() >= 5) {
-
-            // Show dialog one final time
-            AlertDialog alertDialog = new AlertDialog.Builder(PollDetailView.this).create();
-            alertDialog.setTitle("Votes");
-
-            // Show each vote per item
-            String message = mPoll.getVoteString();
-
-            alertDialog.setMessage(message);
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            alertDialog.show();
-
-            // Disable buttons
-            disableButtons();
-
-
-
-            // return
-            return;
-        }
-
-        AlertDialog alertDialog = new AlertDialog.Builder(PollDetailView.this).create();
-        alertDialog.setTitle("Votes");
-
-        // Show each vote per item
-        String message = mPoll.getVoteString();
-
-        alertDialog.setMessage(message);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
+        mbOption1.setText(mCurrentPoll.getPollItems().get(0).getTitle());
+        mbOption2.setText(mCurrentPoll.getPollItems().get(1).getTitle());
+        mbOption3.setText(mCurrentPoll.getPollItems().get(2).getTitle());
     }
 
     public void disableButtons() {

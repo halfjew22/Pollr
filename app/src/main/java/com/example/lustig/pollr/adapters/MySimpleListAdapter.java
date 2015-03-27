@@ -1,6 +1,7 @@
 package com.example.lustig.pollr.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.example.lustig.pollr.R;
 import com.example.lustig.pollr.model.Poll;
 import com.example.lustig.pollr.model.PollItem;
+import com.example.lustig.pollr.view.PollDetailView;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,16 +23,10 @@ public class MySimpleListAdapter extends RecyclerView.Adapter<MySimpleListAdapte
 
     private LayoutInflater mInflator;
 
-    /**
-     * ToDo Change Information out for Poll data and adjust inflation accordingly
-     */
     List<Poll> mData = Collections.emptyList();
     Context mContext;
+    CustomOnItemClickListener mListener;
 
-
-    /**
-     * ToDo Change Information out for Poll data and adjust inflation accordingly
-     */
     public MySimpleListAdapter(Context context, List<Poll> data) {
         mInflator = LayoutInflater.from(context);
         mData = data;
@@ -59,14 +55,22 @@ public class MySimpleListAdapter extends RecyclerView.Adapter<MySimpleListAdapte
         holder.tvOption3.setText(currentPollItems.get(2).getTitle());
 
         holder.root.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+
                 Toast.makeText(
                         mContext,
                         "You clicked the root view",
                         Toast.LENGTH_SHORT
                 ).show();
 
+                Intent showPollDetailIntent = new Intent(mContext, PollDetailView.class);
+                showPollDetailIntent.putExtra(Poll.CLASS_TAG, currentPoll);
+
+                showPollDetailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                mContext.startActivity(showPollDetailIntent);
 
             }
         });
@@ -120,19 +124,22 @@ public class MySimpleListAdapter extends RecyclerView.Adapter<MySimpleListAdapte
 
     }
 
+    public void setCustomOnItemClickListener(CustomOnItemClickListener customClickListener) {
+        mListener = customClickListener;
+    }
 
     @Override
     public int getItemCount() {
         return mData.size();
     }
 
+    public interface CustomOnItemClickListener {
+        public void onItemClick(View view, int position);
+    }
 
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
-
-        /**
-         * ToDo Change Information out for Poll data and adjust inflation accordingly
-         */
+        CustomOnItemClickListener mItemClickListener;
 
         TextView label;
 
@@ -162,6 +169,13 @@ public class MySimpleListAdapter extends RecyclerView.Adapter<MySimpleListAdapte
             tvOption1 = (TextView) itemView.findViewById(R.id.tvOption1);
             tvOption2 = (TextView) itemView.findViewById(R.id.tvOption2);
             tvOption3 = (TextView) itemView.findViewById(R.id.tvOption3);
+
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            mItemClickListener.onItemClick(v, getPosition());
         }
     }
 

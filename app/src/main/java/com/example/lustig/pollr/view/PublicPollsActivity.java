@@ -10,13 +10,12 @@ import android.view.View;
 
 import com.example.lustig.pollr.R;
 import com.example.lustig.pollr.adapters.MySimpleListAdapter;
+import com.example.lustig.pollr.helpers.ParseHelper;
 import com.example.lustig.pollr.model.Poll;
 import com.example.lustig.pollr.model.PollItem;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,14 +45,16 @@ public class PublicPollsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.public_polls_layout);
 
-        // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
+        ParseHelper.InitializeParse(this);
 
-        ParseUser.enableAutomaticUser();
-
-        Parse.initialize(this,
-                "0a0zQDm9BiHwRw6FNQqUM4vj8fHeEAAA4EAVGUr5",
-                "XJhfRJboOpgtxabo4CHLieVCPBA0yDJnI1MDkQnC");
+//        // Enable Local Datastore
+//        Parse.enableLocalDatastore(this);
+//
+//        ParseUser.enableAutomaticUser();
+//
+//        Parse.initialize(this,
+//                "0a0zQDm9BiHwRw6FNQqUM4vj8fHeEAAA4EAVGUr5",
+//                "XJhfRJboOpgtxabo4CHLieVCPBA0yDJnI1MDkQnC");
 
         // Wasn't instantiating my ArrayList so I was getting FCs... D'oh!
         mPolls = new ArrayList<Poll>();
@@ -66,13 +67,11 @@ public class PublicPollsActivity extends Activity {
 
         mPublicPollRecyclerView.setAdapter(mAdapter);
 
+
         mPublicPollRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
     }
 
-    public void button3(View v) {
-        Log.d("BUTTON 3## # # ##!", "Button 3 clicked");
-    }
 
     /**
      * Right now, we are downloading all polls and updating the list with each one.
@@ -137,7 +136,6 @@ public class PublicPollsActivity extends Activity {
         startActivityForResult(i, ADD_POLL_CODE);
 
     }
-
 
     /**
      * Not used, but I'm keeping the code to remember how a Poll is constructed statically
