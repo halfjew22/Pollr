@@ -7,7 +7,11 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.lustig.pollr.R;
+import com.example.lustig.pollr.model.Poll_Text;
+import com.example.lustig.pollr.utilities.PollrDataBase;
 import com.parse.ParseObject;
+
+import org.json.JSONArray;
 
 
 public class AddPollActivity extends Activity {
@@ -16,6 +20,7 @@ public class AddPollActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_poll_layout);
+
     }
 
     public void postPoll(View v) {
@@ -33,16 +38,18 @@ public class AddPollActivity extends Activity {
         returnIntent.putExtra("option1", option1);
         returnIntent.putExtra("option2", option2);
         returnIntent.putExtra("option3", option3);
+        JSONArray options = new JSONArray();
 
-        ParseObject poll = new ParseObject("Poll");
-        poll.put("title", pollTitle);
-        poll.put("option1", option1);
-        poll.put("option2", option2);
-        poll.put("option3", option3);
-        poll.saveInBackground();
 
-        setResult(RESULT_OK, returnIntent);
-        finish();
+            options.put(option1);
+            options.put(option2);
+            options.put(option3);
+
+        Poll_Text pollText = new Poll_Text(pollTitle,0,options);
+        PollrDataBase.AddPoll(pollText);
+
+       // setResult(RESULT_OK, returnIntent);
+       // finish();
 
     }
 

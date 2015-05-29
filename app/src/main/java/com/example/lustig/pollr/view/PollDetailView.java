@@ -1,24 +1,17 @@
+
 package com.example.lustig.pollr.view;
 
-import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.widget.Button;
-import android.widget.TextView;
 
-import com.example.lustig.pollr.R;
-import com.example.lustig.pollr.model.Poll;
-import com.example.lustig.pollr.model.PollItem;
-
-import java.util.List;
 
 /**
  * ToDo fix buttonXClick methods by using implementing an OnClickListener within the class
  *
  */
+/*
 
 public class PollDetailView extends ActionBarActivity {
 
-    Poll mCurrentPoll;
+    Poll_Text mCurrentPollText;
     List<PollItem> mCurrentPollItems;
     TextView mtvTitle;
 
@@ -37,19 +30,19 @@ public class PollDetailView extends ActionBarActivity {
 
         // Stupid workaround, but I'm lazy. Sue me.
         // Wasn't parceable, whodda thought.
-        mCurrentPoll = null;
+        mCurrentPollText = null;
 
         if(extras != null) {
-            mCurrentPoll = extras.getParcelable(Poll.CLASS_TAG);
+            mCurrentPollText = extras.getParcelable(Poll_Text.CLASS_TAG);
         }
 
-        mCurrentPollItems = mCurrentPoll.getPollItems();
+        mCurrentPollItems = mCurrentPollText.getPollItems();
 
-        mtvTitle.setText(mCurrentPoll.getTitle());
+        mtvTitle.setText(mCurrentPollText.getTitle());
 
-        mbOption1.setText(mCurrentPoll.getPollItems().get(0).getTitle());
-        mbOption2.setText(mCurrentPoll.getPollItems().get(1).getTitle());
-        mbOption3.setText(mCurrentPoll.getPollItems().get(2).getTitle());
+        mbOption1.setText(mCurrentPollText.getPollItems().get(0).getTitle());
+        mbOption2.setText(mCurrentPollText.getPollItems().get(1).getTitle());
+        mbOption3.setText(mCurrentPollText.getPollItems().get(2).getTitle());
     }
 
     public void disableButtons() {
@@ -70,3 +63,4 @@ public class PollDetailView extends ActionBarActivity {
 
 
 }
+*/

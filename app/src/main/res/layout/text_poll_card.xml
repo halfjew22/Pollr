@@ -17,7 +17,8 @@
         android:id="@+id/root"
         android:padding="8dp"
         android:clickable="true"
-        android:background="?android:selectableItemBackground">
+        android:background="?android:selectableItemBackground"
+        android:weightSum="1">
 
         <TextView
             android:id="@+id/tvLabel"
@@ -28,31 +29,69 @@
             android:textSize="24sp"
             android:textColor="@color/material_blue_grey_800"/>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/relative"
+            android:layout_weight="5.66">
 
             <Button
                 android:id="@+id/tvOption1"
+                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Option 1"
                 />
 
             <Button
-                android:id="@+id/tvOption2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Option 2" />
+                android:text="Option 2"
+                android:id="@+id/tvOption2"
+                android:visibility="invisible"
+                android:layout_alignParentTop="true"
+                android:layout_alignLeft="@+id/tvOption4"
+                android:layout_alignStart="@+id/tvOption4" />
 
             <Button
                 android:id="@+id/tvOption3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Option 3"/>
+                android:layout_below="@+id/tvOption1"
+                android:visibility="invisible"
+                android:text="Option 3" />
 
-        </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Option 4"
+                android:id="@+id/tvOption4"
+                android:visibility="invisible"
+                android:layout_below="@+id/tvOption2"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp" />
+
+            <Button
+                android:id="@+id/tvOption5"
+                android:layout_width="wrap_content"
+                android:layout_below="@+id/tvOption3"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:text="Option 5"/>
+
+            <Button
+                android:id="@+id/tvOption6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Option 6"
+                android:visibility="invisible"
+                android:layout_below="@+id/tvOption4"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp" />
+
+
+        </RelativeLayout>
 
     </LinearLayout>
 

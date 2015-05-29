@@ -8,7 +8,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.lustig.pollr.R;
-import com.example.lustig.pollr.model.Poll;
+import com.example.lustig.pollr.model.Poll_Text;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -59,7 +59,7 @@ public class MyPollsActivity extends ActionBarActivity {
         });
 
     }
-
+/*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -78,7 +78,7 @@ public class MyPollsActivity extends ActionBarActivity {
                 option2 = data.getStringExtra("option2");
                 option3 = data.getStringExtra("option3");
 
-                Poll newItem = new Poll(title);
+                Poll_Text newItem = new Poll_Text(title);
 //                mAdapter.addItem(newItem, true);
 
             } else {
@@ -91,7 +91,7 @@ public class MyPollsActivity extends ActionBarActivity {
         }
 
     }
-
+*/
     public void addPoll(View v) {
 //        CardItemData newCardData = new CardItemData(
 //                "this is new data!!!",

@@ -5,20 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.example.lustig.pollr.R;
+
 import com.example.lustig.pollr.adapters.MySimpleListAdapter;
-import com.example.lustig.pollr.helpers.ParseHelper;
-import com.example.lustig.pollr.model.Poll;
-import com.example.lustig.pollr.model.PollItem;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
+import com.example.lustig.pollr.model.Poll_Text;
+
+import com.example.lustig.pollr.utilities.PollrDataBase;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /** Checklist **
  * RecyclerView in its most limited state is working
@@ -31,7 +27,7 @@ import java.util.List;
 
 public class PublicPollsActivity extends Activity {
 
-    ArrayList<Poll> mPolls;
+    ArrayList<Poll_Text> mPollTexts;
     RecyclerView mPublicPollRecyclerView;
     private MySimpleListAdapter mAdapter;
 
@@ -45,7 +41,9 @@ public class PublicPollsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.public_polls_layout);
 
-        ParseHelper.InitializeParse(this);
+
+
+        PollrDataBase.init_db(this);
 
 //        // Enable Local Datastore
 //        Parse.enableLocalDatastore(this);
@@ -56,12 +54,12 @@ public class PublicPollsActivity extends Activity {
 //                "0a0zQDm9BiHwRw6FNQqUM4vj8fHeEAAA4EAVGUr5",
 //                "XJhfRJboOpgtxabo4CHLieVCPBA0yDJnI1MDkQnC");
 
-        // Wasn't instantiating my ArrayList so I was getting FCs... D'oh!
-        mPolls = new ArrayList<Poll>();
 
-        getUpdateFromDatabase();
+        mPollTexts = PollrDataBase.getTextPollsFromDatabase();
 
-        mAdapter = new MySimpleListAdapter(getApplicationContext(), mPolls);
+
+
+       mAdapter = new MySimpleListAdapter(getApplicationContext(), mPollTexts);
 
         mPublicPollRecyclerView = (RecyclerView) findViewById(R.id.publicpollRecyclerView);
 
@@ -73,39 +71,7 @@ public class PublicPollsActivity extends Activity {
     }
 
 
-    /**
-     * Right now, we are downloading all polls and updating the list with each one.
-     * This is terribly inefficient. I think we might need to add more fields to the object
-     * to determine when objects were added. Right now, I can't really think of the most efficient
-     * way to load every poll with up to date changes... Hmmmm
-     *
-     * Query the database for all polls, and put that information in the mPolls ArrayList
-     *
-     * We can also have this activated by a button.
-     *
-     * Currently, just called in the beginning of onCreate.
-     */
-    public void getUpdateFromDatabase() {
 
-        // Assume ParseObject myPost was previously created.
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Poll");
-
-        try {
-            List<ParseObject> objects = query.find();
-
-            for (ParseObject obj : objects) {
-
-                Log.d("MichaelLustig", obj.getObjectId());
-
-                Poll poll = new Poll(obj);
-                mPolls.add(poll);
-
-                Log.d("MichaelLustig", mPolls.size() + "");
-            }
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
 /**
  * ToDo figure out why I can't get findInBackground to work, although the same behavior is achieved
@@ -128,7 +94,7 @@ public class PublicPollsActivity extends Activity {
 //                //setAdapter();
 //            }
 //        });
-    }
+   // }
 
     public void addPoll(View v) {
 
@@ -137,56 +103,7 @@ public class PublicPollsActivity extends Activity {
 
     }
 
-    /**
-     * Not used, but I'm keeping the code to remember how a Poll is constructed statically
-     */
-    private void createStaticPublicArrayList() {
 
-        mPolls = new ArrayList<>();
-
-        // Add 3 fun polls
-
-        // Dress color
-        Poll dressColor = new Poll("What color is this dress?",
-                new ArrayList<PollItem>() {{
-
-                    add(new PollItem("blue and black"));
-                    add(new PollItem("gold and white"));
-                    add(new PollItem("SHUT THE FUCK UP ABOUT THE DRESS!"));
-
-                }} );
-
-        // Who let the dogs out
-        Poll dogsOut = new Poll("Who let the dogs out?",
-
-                new ArrayList<PollItem>() {{
-
-                    add(new PollItem("Who?"));
-                    add(new PollItem("Who??"));
-                    add(new PollItem("WHO?!!"));
-
-                }}
-
-        );
-
-        // What's cooler than being cool
-        Poll coolerThanCool = new Poll("What's cooler than bein' cool?",
-
-                new ArrayList<PollItem>() {{
-
-                    add(new PollItem("A polar bear's toenail."));
-                    add(new PollItem("This dick."));
-                    add(new PollItem("Ice cold!"));
-
-                }}
-
-        );
-
-        mPolls.add(dressColor);
-        mPolls.add(dogsOut);
-        mPolls.add(coolerThanCool);
-
-    }
 
 }
 
