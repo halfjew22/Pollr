@@ -40,13 +40,14 @@ public class Poll_Text {
         itemNumber = 0;
     }
 
-    public Poll_Text( String title, int vote, JSONArray options) {
+    public Poll_Text( String title, int vote, JSONArray options,int itemNumber) {
 
 
         this.id = "";
         this.title = title;
         this.vote = vote;
         this.options = options;
+        this.itemNumber = itemNumber;
     }
 
 

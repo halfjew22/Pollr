@@ -1,52 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                tools:context="com.tipsandtricks.Pollr.view.AddPollActivity">
+    android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etPollName"
+    <LinearLayout
+        android:id="@+id/parent_layout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:hint="Poll Question"/>
+        android:layout_alignParentStart="true">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etOption1"
-        android:layout_below="@+id/etPollName"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="68dp"
-        android:hint="New option"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/poll_title"
+            android:id="@+id/poll_title" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etOption2"
-        android:hint="New option"
-        android:layout_below="@+id/etOption1"
-        android:layout_alignParentLeft="true"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/option1"
+            android:id="@+id/option1" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etOption3"
-        android:hint="New option"
-        android:layout_below="@+id/etOption2"
-        android:layout_alignParentLeft="true"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/option2"
+            android:id="@+id/option2" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:id="@+id/new_options"
+            android:layout_height="wrap_content">
+
+
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="add options"
+
+            android:id="@+id/add_options_button" />
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Post"
-        android:id="@+id/bPost"
+        android:text="Add poll"
+        android:onClick="postPoll"
+        android:id="@+id/add_poll_button"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/etPollName"
-        android:onClick="postPoll"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

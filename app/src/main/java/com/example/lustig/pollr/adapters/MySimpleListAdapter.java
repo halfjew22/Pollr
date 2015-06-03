@@ -132,7 +132,7 @@ public class MySimpleListAdapter extends RecyclerView.Adapter<MySimpleListAdapte
             @Override
             public void onClick(View v) {
 
-                PollrDataBase.IncrementPoll(0, currentPollText.id);
+                PollrDataBase.IncrementPoll(1, currentPollText.id);
 
                 Toast.makeText(
                         mContext,
@@ -149,7 +149,7 @@ public class MySimpleListAdapter extends RecyclerView.Adapter<MySimpleListAdapte
             @Override
             public void onClick(View v) {
 
-                PollrDataBase.IncrementPoll(1,currentPollText.id);;
+                PollrDataBase.IncrementPoll(2,currentPollText.id);;
 
                 Toast.makeText(
                         mContext,
@@ -164,7 +164,7 @@ public class MySimpleListAdapter extends RecyclerView.Adapter<MySimpleListAdapte
             @Override
             public void onClick(View v) {
 
-                PollrDataBase.IncrementPoll(2,currentPollText.id);
+                PollrDataBase.IncrementPoll(3,currentPollText.id);
 
                 Toast.makeText(
                         mContext,
@@ -179,7 +179,7 @@ public class MySimpleListAdapter extends RecyclerView.Adapter<MySimpleListAdapte
             @Override
             public void onClick(View v) {
 
-                PollrDataBase.IncrementPoll(3,currentPollText.id);
+                PollrDataBase.IncrementPoll(4,currentPollText.id);
 
                 Toast.makeText(
                         mContext,
@@ -194,7 +194,7 @@ public class MySimpleListAdapter extends RecyclerView.Adapter<MySimpleListAdapte
             @Override
             public void onClick(View v) {
 
-                PollrDataBase.IncrementPoll(4,currentPollText.id);
+                PollrDataBase.IncrementPoll(5,currentPollText.id);
 
                 Toast.makeText(
                         mContext,
@@ -209,7 +209,7 @@ public class MySimpleListAdapter extends RecyclerView.Adapter<MySimpleListAdapte
             @Override
             public void onClick(View v) {
 
-                PollrDataBase.IncrementPoll(5,currentPollText.id);
+                PollrDataBase.IncrementPoll(6,currentPollText.id);
 
                 Toast.makeText(
                         mContext,

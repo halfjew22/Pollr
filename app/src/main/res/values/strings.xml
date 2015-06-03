@@ -8,4 +8,7 @@
     <string name="title_activity_home_screen">HomeScreenActivity</string>
     <string name="title_activity_my_polls">MyPollsActivity</string>
     <string name="title_activity_poll_detail_view">PollDetailView</string>
+    <string name="poll_title">Poll title</string>
+    <string name="option1">option 2</string>
+    <string name="option2">option 2</string>
 </resources>

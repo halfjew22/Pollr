@@ -25,13 +25,13 @@ public class PollrDataBase {
     //Poll_Text attributes
     public static final String TITLE = "title";
     public static final String OPTIONS = "options";
-    public static final String ITEMNUMBER = "itemNumber";
-    public static final String VOTE0 = "vote";
+    public static final String ITEMNUMBER = "itemNumber";;
     public static final String VOTE1 = "vote1";
     public static final String VOTE2 = "vote2";
     public static final String VOTE3 = "vote3";
     public static final String VOTE4 = "vote4";
     public static final String VOTE5 = "vote5";
+    public static final String VOTE6 = "vote6";
     public static final String VOTE = "vote";
 
     public static boolean init_db(Context c)
@@ -58,12 +58,14 @@ public class PollrDataBase {
         ParseObject parseObject = new ParseObject("Poll_Text");
         parseObject.put(TITLE,pollText.title);
         parseObject.put(OPTIONS, pollText.options);
-        parseObject.put(VOTE0,0);
+
         parseObject.put(VOTE1,0);
         parseObject.put(VOTE2,0);
         parseObject.put(VOTE3,0);
         parseObject.put(VOTE4,0);
         parseObject.put(VOTE5,0);
+        parseObject.put(VOTE6,0);
+        parseObject.put(ITEMNUMBER,pollText.itemNumber);
 
         try {
             parseObject.save();
